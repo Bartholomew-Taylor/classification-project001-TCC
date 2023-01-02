@@ -8,7 +8,21 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
-
+def clean_telco(df):
+    '''
+    this function cleans up the telco db
+    '''
+    
+    to_drop = ['customer_id','internet_service_type_id', 'internet_service_type_id.1', 
+               'contract_type_id', 'payment_type_id', 'internet_service_type_id',
+               'senior_citizen.1', 'payment_type_id.1', 'gender.1', 'contract_type_id.1',
+               'paperless_billing.1','gender.1','senior_citizen.1', 'partner.1','dependents.1',
+               'payment_type_id.1', 'monthly_charges.1', 'total_charges.1','phone_service.1',
+               'multiple_lines.1', 'online_security.1','online_backup.1','device_protection.1',
+               'tech_support.1', 'streaming_tv.1','streaming_movies.1']
+    df.drop(columns = to_drop, inplace = True)
+    df.drop(df.columns[0], axis = 1, inplace = True)
+    return df
 
 def train_val_test(df, target):
     '''
