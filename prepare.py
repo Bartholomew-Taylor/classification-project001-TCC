@@ -23,6 +23,8 @@ def clean_telco(df):
     df.drop(columns = to_drop, inplace = True)
     df.drop(df.columns[0], axis = 1, inplace = True)
     df['total_charges'] = (df.tenure * df.monthly_charges)
+    df = df[df.total_charges != 0]
+    df['charge_rank'] = pd.qcut(df['total_charges'], 4, labels = ['a','b','c','d'])
     return df
 
 def train_val_test(df, target):
